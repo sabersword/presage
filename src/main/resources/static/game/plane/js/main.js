@@ -117,7 +117,7 @@ game.States.preload = function() {
     game.load.spritesheet('myplane', 'assets/myplane.png', 40, 40, 4);
     game.load.spritesheet('startbutton', 'assets/startbutton.png', 100, 40, 2);
     game.load.spritesheet('replaybutton', 'assets/replaybutton.png', 80, 30, 2);
-    game.load.spritesheet('sharebutton', 'assets/sharebutton.png', 80, 30, 2);
+    game.load.spritesheet('sharebutton', 'assets/sharebutton1.png', 80, 30, 2);
     game.load.image('mybullet', 'assets/mybullet.png');
     game.load.image('bullet', 'assets/bullet.png');
     game.load.image('enemy1', 'assets/enemy1.png');
@@ -427,7 +427,9 @@ game.States.over = function() {
     // 重来按钮
     this.replaybutton = game.add.button(30, 300, 'replaybutton', this.onReplayClick, this, 0, 0, 1);
     // 分享按钮
-    this.sharebutton = game.add.button(130, 300, 'replaybutton', this.onShareClick, this, 0, 0, 1);
+      if(score > 20) {
+        this.sharebutton = game.add.button(130, 300, 'sharebutton', this.onShareClick, this, 0, 0, 1);
+      }
     // 背景音乐
     this.normalback = game.add.audio('normalback', 0.2, true);
     this.normalback.play();
@@ -443,7 +445,8 @@ game.States.over = function() {
   		url: '/getOneRedPacket',
   		type: 'get',
   		success: function(data){
-  			alert(data);
+  			alert(score);
+  			score = 0;
   		},
   		fail: function(){
   			alert('fail');

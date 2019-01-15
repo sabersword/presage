@@ -1,1 +1,5 @@
-本地调试的地址http://localhost:8080/game/plane/index.html
+##本地调试的地址
+http://localhost:8081/game/plane/index.html
+
+##运行脚本
+nohup java -jar presage-*.jar > persage.log 2>&1 &
