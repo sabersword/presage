@@ -43,7 +43,16 @@ function Enemy(config) {
       if(bullet) {
         if(game.time.now > (enemy.bulletTime || 0)) {
           bullet.reset(enemy.x + config.bulletX, enemy.y + config.bulletY);
-          bullet.body.velocity.y = config.bulletVelocity;
+          if (score <= 300) {  // 阶梯难度
+                bullet.body.velocity.y = config.bulletVelocity;
+          }
+          if (score > 300) {
+              bullet.body.velocity.y = config.bulletVelocity + 150;
+          }
+          if (score > 700) {
+              bullet.body.velocity.y = config.bulletVelocity + 200;
+          }
+          // bullet.body.velocity.y = config.bulletVelocity;
           enemy.bulletTime = game.time.now + config.bulletTimeInterval;
         }
       }
@@ -221,7 +230,7 @@ game.States.start = function() {
     this.awards.setAll('outOfBoundsKill', true);
     this.awards.setAll('checkWorldBounds', true);
     this.awardMaxWidth = game.width - game.cache.getImage('award').width;
-    game.time.events.loop(Phaser.Timer.SECOND * 10, this.generateAward, this); // 每隔10秒一个奖励
+    game.time.events.loop(Phaser.Timer.SECOND * 15, this.generateAward, this); // 每隔15秒一个奖励
     // 分数
     var style = {font: "16px Arial", fill: "#ff0000"};
     this.text = game.add.text(0, 0, "分数达到" + redPacketScore + "有神秘礼物哦!", style); // 添加规则说明
@@ -240,7 +249,7 @@ game.States.start = function() {
         velocity: 50,
         bulletX: 9,
         bulletY: 20,
-        bulletVelocity: 200,
+        bulletVelocity: 80,
         selfTimeInterval: 2,
         bulletTimeInterval: 1000,
         score: 10,
@@ -259,8 +268,8 @@ game.States.start = function() {
         velocity: 40,
         bulletX: 13,
         bulletY: 30,
-        bulletVelocity: 250,
-        selfTimeInterval: 3,
+        bulletVelocity: 110,
+        selfTimeInterval: 5,
         bulletTimeInterval: 1200,
         score: 20,
         firesound: this.firesound,
@@ -278,8 +287,8 @@ game.States.start = function() {
         velocity: 30,
         bulletX: 22,
         bulletY: 50,
-        bulletVelocity: 300,
-        selfTimeInterval: 5,
+        bulletVelocity: 150,
+        selfTimeInterval: 10,
         bulletTimeInterval: 1500,
         score: 50,
         firesound: this.firesound,
@@ -460,7 +469,7 @@ game.States.over = function() {
             } else if (data === "none") {
                 alert('红包派完了');
             } else {
-                alert('恭喜你,你的红包口令是[' + data + '],考验你记忆力的时候到了,牢记这8个数字到支付宝--红包,输入口令领取红包吧');
+                alert('恭喜你,你的红包口令是[' + data + '],考验你记忆力的时候到了,牢记这8个数字到[支付宝]打开[红包]页面,输入口令领取红包吧');
                 score = -1;
             }
   		},
