@@ -1,6 +1,8 @@
 
 /***********************/
 
+var redPacketScore = 1000;
+
 function Enemy(config) {
   this.init = function() {
     this.enemys = game.add.group();
@@ -114,15 +116,17 @@ game.States.preload = function() {
     game.load.setPreloadSprite(preloadSprite);
     game.load.image('background', 'assets/bg.jpg');
     game.load.image('copyright', 'assets/copyright.png');
-    game.load.spritesheet('myplane', 'assets/myplane.png', 40, 40, 4);
+    game.load.spritesheet('myplane', 'assets/plane.png', 40, 40, 4);  // 我的飞机
     game.load.spritesheet('startbutton', 'assets/startbutton.png', 100, 40, 2);
     game.load.spritesheet('replaybutton', 'assets/replaybutton.png', 80, 30, 2);
-    game.load.spritesheet('sharebutton', 'assets/sharebutton1.png', 80, 30, 2);
+    game.load.spritesheet('sharebutton', 'assets/redpacket.png', 80, 30, 2);
     game.load.image('mybullet', 'assets/mybullet.png');
     game.load.image('bullet', 'assets/bullet.png');
     game.load.image('enemy1', 'assets/enemy1.png');
     game.load.image('enemy2', 'assets/enemy2.png');
     game.load.image('enemy3', 'assets/enemy3.png');
+    game.load.image('yan', 'assets/yan.png');  // 加载个人头像
+    game.load.image('zheng', 'assets/zheng.png');
     game.load.spritesheet('explode1', 'assets/explode1.png', 20, 20, 3);
     game.load.spritesheet('explode2', 'assets/explode2.png', 30, 30, 3);
     game.load.spritesheet('explode3', 'assets/explode3.png', 50, 50, 3);
@@ -217,10 +221,10 @@ game.States.start = function() {
     this.awards.setAll('outOfBoundsKill', true);
     this.awards.setAll('checkWorldBounds', true);
     this.awardMaxWidth = game.width - game.cache.getImage('award').width;
-    game.time.events.loop(Phaser.Timer.SECOND * 30, this.generateAward, this);
+    game.time.events.loop(Phaser.Timer.SECOND * 10, this.generateAward, this); // 每隔10秒一个奖励
     // 分数
     var style = {font: "16px Arial", fill: "#ff0000"};
-    this.text = game.add.text(0, 0, "Score: 0", style);
+    this.text = game.add.text(0, 0, "分数达到" + redPacketScore + "有神秘礼物哦!", style); // 添加规则说明
     score = 0;
     // 敌机
     var enemyTeam = {
@@ -245,7 +249,7 @@ game.States.start = function() {
       },
       enemy2: {
         game: this,
-        selfPic: 'enemy2',
+        selfPic: 'yan',  // 个人头像敌人
         bulletPic: 'bullet',
         explodePic: 'explode2',
         selfPool: 10,
@@ -264,7 +268,7 @@ game.States.start = function() {
       },
       enemy3: {
         game: this,
-        selfPic: 'enemy3',
+        selfPic: 'zheng',
         bulletPic: 'bullet',
         explodePic: 'explode3',
         selfPool: 5,
@@ -275,7 +279,7 @@ game.States.start = function() {
         bulletX: 22,
         bulletY: 50,
         bulletVelocity: 300,
-        selfTimeInterval: 10,
+        selfTimeInterval: 5,
         bulletTimeInterval: 1500,
         score: 50,
         firesound: this.firesound,
@@ -294,7 +298,7 @@ game.States.start = function() {
     var award = this.awards.getFirstExists(false);
     if(award) {
       award.reset(game.rnd.integerInRange(0, this.awardMaxWidth), -game.cache.getImage('award').height);
-      award.body.velocity.y = 500;
+      award.body.velocity.y = 200;
     }
   };
   // 自己开火
@@ -365,7 +369,7 @@ game.States.start = function() {
     try {
       this.deng.play();
     } catch(e) {}
-    if(myplane.level < 3) {
+    if(myplane.level < 2) {
       myplane.level++;
     }
   };
@@ -427,9 +431,7 @@ game.States.over = function() {
     // 重来按钮
     this.replaybutton = game.add.button(30, 300, 'replaybutton', this.onReplayClick, this, 0, 0, 1);
     // 分享按钮
-      if(score > 20) {
-        this.sharebutton = game.add.button(130, 300, 'sharebutton', this.onShareClick, this, 0, 0, 1);
-      }
+    this.sharebutton = game.add.button(130, 300, 'sharebutton', this.onShareClick, this, 0, 0, 1);
     // 背景音乐
     this.normalback = game.add.audio('normalback', 0.2, true);
     this.normalback.play();
@@ -441,20 +443,33 @@ game.States.over = function() {
   };
   // 分享
   this.onShareClick = function() {
+    if (score < 0) {
+      alert('一场游戏只能领取一次红包,重新来一场吧');
+      return;
+    }
+    if (score < redPacketScore) {
+        alert('达到' + redPacketScore + '分才有红包领哦');
+        return;
+    }
   	$.ajax({
-  		url: '/getOneRedPacket',
+  		url: '/getOneRedPacket?score=' + score,
   		type: 'get',
   		success: function(data){
-  			alert(score);
-  			score = 0;
+  		    if (data === '403') {
+  		        alert('太多人挤爆服务器了,请等一会再试');
+            } else if (data === "none") {
+                alert('红包派完了');
+            } else {
+                alert('恭喜你,你的红包口令是[' + data + '],考验你记忆力的时候到了,牢记这8个数字到支付宝--红包,输入口令领取红包吧');
+                score = -1;
+            }
   		},
   		fail: function(){
-  			alert('fail');
+  			alert('系统出错了');
   		}
   	});
 
-
-    document.title = makeTitle(score);
+    // document.title = makeTitle(score);
     document.getElementById('share').style.display = 'block';
   };
 }
