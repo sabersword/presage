@@ -230,7 +230,7 @@ game.States.start = function() {
     this.awards.setAll('outOfBoundsKill', true);
     this.awards.setAll('checkWorldBounds', true);
     this.awardMaxWidth = game.width - game.cache.getImage('award').width;
-    game.time.events.loop(Phaser.Timer.SECOND * 15, this.generateAward, this); // 每隔15秒一个奖励
+    game.time.events.loop(Phaser.Timer.SECOND * 20, this.generateAward, this); // 每隔15秒一个奖励
     // 分数
     var style = {font: "16px Arial", fill: "#ff0000"};
     this.text = game.add.text(0, 0, "分数达到" + redPacketScore + "有神秘礼物哦!", style); // 添加规则说明
@@ -249,7 +249,7 @@ game.States.start = function() {
         velocity: 50,
         bulletX: 9,
         bulletY: 20,
-        bulletVelocity: 80,
+        bulletVelocity: 100,
         selfTimeInterval: 2,
         bulletTimeInterval: 1000,
         score: 10,
@@ -268,7 +268,7 @@ game.States.start = function() {
         velocity: 40,
         bulletX: 13,
         bulletY: 30,
-        bulletVelocity: 110,
+        bulletVelocity: 130,
         selfTimeInterval: 5,
         bulletTimeInterval: 1200,
         score: 20,
@@ -287,7 +287,7 @@ game.States.start = function() {
         velocity: 30,
         bulletX: 22,
         bulletY: 50,
-        bulletVelocity: 150,
+        bulletVelocity: 170,
         selfTimeInterval: 10,
         bulletTimeInterval: 1500,
         score: 50,
@@ -468,6 +468,8 @@ game.States.over = function() {
   		        alert('太多人挤爆服务器了,请等一会再试');
             } else if (data === "none") {
                 alert('红包派完了');
+            } else if (data === "shutdown") {
+  		        alert('活动已结束');
             } else {
                 alert('恭喜你,你的红包口令是[' + data + '],考验你记忆力的时候到了,牢记这8个数字到[支付宝]打开[红包]页面,输入口令领取红包吧');
                 score = -1;

@@ -20,14 +20,27 @@ public class RedPacketController {
     @Autowired
     private RedPacketDao redPacketDao;
 
+    private boolean enable = true;
     private Timer timer = new Timer();
     private int quota = MAX_QUOTA;
+    // 5分钟5个
+    private static int MAX_QUOTA = 5;
+    private static int INTERVAL = 300 * 1000;
 
-    private static int MAX_QUOTA = 2;
-    private static int INTERVAL = 120 * 1000;
 
     @RequestMapping("getOneRedPacket")
     public String getOneRedPacket(Integer score) {
+        synchronized (RedPacketController.class) {
+            if (!enable) {
+                return "shutdown";
+            }
+        }
+
+        String token = redPacketDao.queryRedPacket();
+        if (token == null) {
+            return "none";
+        }
+
         synchronized (RedPacketController.class) {
             if (quota >= MAX_QUOTA) {
                 timer.schedule(new TimerTask(){
@@ -42,17 +55,28 @@ public class RedPacketController {
             quota--;
         }
         System.err.println("此时的count值" + quota);
+        // 限流
         if (quota <= -1) {
             return "403";
-        }
-
-        String token = redPacketDao.queryRedPacket();
-        if (token == null) {
-            return "none";
         }
 
         redPacketDao.consumeRedPacket(token, score);
         return token;
     }
 
+    @RequestMapping("stop")
+    public boolean stop() {
+        synchronized (RedPacketController.class) {
+            enable = false;
+        }
+        return enable;
+    }
+
+    @RequestMapping("start")
+    public boolean start() {
+        synchronized (RedPacketController.class) {
+            enable = true;
+        }
+        return enable;
+    }
 }
