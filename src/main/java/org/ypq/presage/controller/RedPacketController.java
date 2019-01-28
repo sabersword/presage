@@ -23,8 +23,8 @@ public class RedPacketController {
     private boolean enable = true;
     private Timer timer = new Timer();
     private int quota = MAX_QUOTA;
-    // 5分钟5个
-    private static int MAX_QUOTA = 5;
+    // 5分钟8个 ,结果被薅了不少羊毛
+    private static int MAX_QUOTA = 8;
     private static int INTERVAL = 300 * 1000;
 
 
