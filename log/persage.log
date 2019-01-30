@@ -1,0 +1,165 @@
+nohup: ignoring input
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.2.RELEASE)
+
+2019-01-26 13:18:50.097  INFO 17401 --- [           main] org.ypq.presage.PresageApplication       : Starting PresageApplication v0.0.1-SNAPSHOT on iZwz9ftl2bwabwbbn7vln3Z with PID 17401 (/root/presage-0.0.1-SNAPSHOT.jar started by root in /root)
+2019-01-26 13:18:50.102  INFO 17401 --- [           main] org.ypq.presage.PresageApplication       : No active profile set, falling back to default profiles: default
+2019-01-26 13:18:52.267  INFO 17401 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2019-01-26 13:18:52.310  INFO 17401 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-26 13:18:52.311  INFO 17401 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-01-26 13:18:52.325  INFO 17401 --- [           main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-01-26 13:18:52.461  INFO 17401 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-26 13:18:52.462  INFO 17401 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2246 ms
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+2019-01-26 13:18:53.234  INFO 17401 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-26 13:18:53.592  INFO 17401 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2019-01-26 13:18:53.602  INFO 17401 --- [           main] org.ypq.presage.PresageApplication       : Started PresageApplication in 4.653 seconds (JVM running for 5.19)
+2019-01-26 13:19:14.315  INFO 17401 --- [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-01-26 13:19:14.315  INFO 17401 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-01-26 13:19:14.331  INFO 17401 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2019-01-26 13:19:55.367  INFO 17401 --- [nio-8081-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-01-26 13:19:55.374  WARN 17401 --- [nio-8081-exec-9] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2019-01-26 13:19:55.594  INFO 17401 --- [nio-8081-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+此时的count值7
+此时的count值7
+此时的count值7
+此时的count值7
+此时的count值7
+此时的count值6
+此时的count值7
+此时的count值6
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值7
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值1
+此时的count值0
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值1
+此时的count值0
+此时的count值-1
+此时的count值-2
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值1
+此时的count值0
+此时的count值-1
+此时的count值-2
+此时的count值-3
+此时的count值-4
+此时的count值-5
+此时的count值-6
+此时的count值-7
+此时的count值-8
+此时的count值-9
+此时的count值-10
+此时的count值-11
+此时的count值-12
+此时的count值-13
+此时的count值-14
+此时的count值-15
+此时的count值-16
+此时的count值-17
+此时的count值-18
+此时的count值-19
+此时的count值-20
+此时的count值-21
+此时的count值-22
+此时的count值-23
+此时的count值-24
+此时的count值-25
+此时的count值-26
+此时的count值-27
+此时的count值-28
+此时的count值-29
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值1
+此时的count值0
+此时的count值7
+此时的count值6
+此时的count值5
+此时的count值4
+此时的count值3
+此时的count值2
+此时的count值1
+此时的count值0
+此时的count值-1
+此时的count值-2
+此时的count值-3
+此时的count值-4
+此时的count值7
+此时的count值6
+此时的count值5
+2019-01-27 00:39:28.092  INFO 17401 --- [       Thread-4] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-27 00:39:28.093  INFO 17401 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-01-27 00:39:28.099  INFO 17401 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
